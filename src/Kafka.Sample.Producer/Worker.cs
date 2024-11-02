@@ -19,12 +19,12 @@ namespace Kafka.Sample.Producer
 
                 try
                 {
-                    var deliveryResult = await producer.ProduceAsync(_topic, new Message<Null, string> { Value = message });
+                    var deliveryResult = await producer.ProduceAsync(_topic, new Message<Null, string> { Value = message }, stoppingToken);
                     logger.LogInformation("Message delivered to {topicPartition}", deliveryResult.TopicPartitionOffset);
                 }
                 catch (ProduceException<Null, string> e)
                 {
-                    logger.LogError($"Delivery failed: {e.Error.Reason}");
+                    logger.LogError("Delivery failed: {error}", e.Error.Reason);
                 }
 
                 await Task.Delay(1000, stoppingToken);

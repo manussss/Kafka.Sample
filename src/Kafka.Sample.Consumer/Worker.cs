@@ -26,7 +26,7 @@ namespace Kafka.Sample.Consumer
                 while (!stoppingToken.IsCancellationRequested)
                 {
                     var cr = consumer.Consume(stoppingToken);
-                    logger.LogInformation("Message: {message} received from {topicPartition}", cr.Value, cr.TopicPartitionOffset);
+                    logger.LogInformation("Message: {message} received from {topicPartition}", cr.Message.Value, cr.TopicPartitionOffset);
 
                     await Task.Delay(1000, stoppingToken);
                 }
